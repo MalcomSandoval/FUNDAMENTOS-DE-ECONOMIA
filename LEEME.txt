@@ -1,0 +1,215 @@
+DIAGNÓSTICO SOCIOECONÓMICO Y MACROECONÓMICO - LA GUAJIRA
+================================================================
+
+Página web estática con visualizaciones y tablas sobre La Guajira y Riohacha.
+Incluye indicadores sociales, PIB, inflación, desempleo e informalidad, y un
+mapa interactivo de los 15 municipios del departamento, con fuentes oficiales
+y notas metodológicas.
+
+1. CÓMO ABRIR LA PÁGINA
+-----------------------
+Recomendado: servir la carpeta con un servidor local y abrir index.html.
+
+  cd "FUNDAMENTOS DE ECONOMIA"
+  python3 -m http.server 8000
+
+Luego abra:
+  http://localhost:8000/index.html
+
+Si abre index.html con doble clic, el mapa interactivo sí funciona porque sus
+geometrías están incluidas en map_guajira.js y no dependen de internet. El
+navegador puede bloquear la carga automática de los archivos JSON por
+seguridad; en ese caso la página muestra los datos de respaldo y un aviso, y
+puede usar los selectores de "Cargar archivo local" en la sección
+"Datos y rutas dinámicas". Las tablas y gráficas principales no quedan vacías.
+
+2. ARCHIVOS DEL PROYECTO
+------------------------
+- index.html: estructura y contenido de la página.
+- styles.css: diseño visual, tarjetas, tablas, gráficas, mapa, temas claro/oscuro y responsive.
+- app.js: carga de datos, tablas dinámicas, gráficas SVG, mapa interactivo, KPI, navegación y tema.
+- map_guajira.js: geometrías simplificadas del DANE y metadatos del mapa interactivo.
+- config.js: rutas de los archivos fuente y de los JSON; nombres del territorio.
+- favicon.svg: icono de la página.
+- data_guajira.json: paquete unificado con IPC, empleo, ramas, PIB,
+  informalidad y las tablas por sexo y por edad.
+- ipc_riohacha.json: serie de inflación de Riohacha y Colombia.
+- empleo_guajira.json: serie de empleo departamental y referencia nacional.
+- IPC  ciudades.xlsx: archivo fuente original del IPC.
+- Empleo departamentos.xls: archivo fuente original de empleo.
+- LEEME.txt: este documento.
+
+3. RUTAS DINÁMICAS
+------------------
+Edite config.js para cambiar:
+- sources.ipcExcel: archivo fuente original del IPC.
+- sources.empleoExcel: archivo fuente original de empleo.
+- sources.ipcData: JSON de IPC usado por la página.
+- sources.empleoData: JSON de empleo usado por la página.
+- sources.bundle: paquete unificado usado por la página.
+- territorio.departamento / territorio.capital / territorio.codigoDane.
+
+También puede cambiar las rutas desde los campos de la sección
+"Datos y rutas dinámicas" y pulsar "Recargar datos".
+
+4. CONTENIDO Y FUENTES
+----------------------
+Tabla 1. Caracterización general
+- Población 2025: DANE, proyecciones de población 2018-2050 y proyección
+  municipal 2025; DNP, Programación presupuestal 2025.
+- Extensión: IGAC (departamento) y Alcaldía de Riohacha (municipio).
+- Municipios: DANE, DIVIPOLA 2025.
+- Participación en el PIB: DANE, Cuentas Nacionales Departamentales, 2025pr.
+
+Tabla 1A. Mercado laboral por sexo, 2025
+- DANE, GEIH, mercado laboral por departamentos 2025.
+- Totales, hombres y mujeres de "Empleo departamentos.xls" (hojas
+  "Departamentos anual", "Departamentos anual hombres" y
+  "Departamentos anual mujeres").
+- Contraste con el boletín "bol-GEIHDepartamentos-2025.pdf".
+- Población y fuerza de trabajo en miles de personas; tasas en porcentaje.
+  La población es la expansión de la GEIH, no la proyección de la Tabla 1.
+- Brecha = mujeres menos hombres; en tasas, puntos porcentuales.
+
+Tabla 2. Indicadores sociales
+- Pobreza monetaria y extrema 2025: DANE.
+- Pobreza multidimensional 2024: DANE.
+- NBI 2018: DANE, CNPV 2018 (actualización 2021).
+- Cobertura neta en educación media 2022: Ministerio de Educación Nacional /
+  Fundación Empresarios por la Educación.
+- Afiliación en salud 2025: Ministerio de Salud y Protección Social, BDUA /
+  Así Vamos en Salud.
+- Acueducto y alcantarillado 2018: DANE, CNPV 2018.
+
+Tabla 3. PIB 2016-2025
+- DANE, Cuentas Nacionales Departamentales, PIB departamental 2025pr.
+- PIB a precios corrientes, base 2015, en billones de pesos.
+- Crecimiento real calculado con la serie de volumen (base 2015).
+- 2024p: preliminar; 2025pr: preliminar revisado.
+- Participación = PIB La Guajira / PIB Colombia.
+
+Tabla 4. Estructura del empleo por ramas
+- DANE, GEIH, ocupados según ramas CIIU 4 A.C., departamentos.
+- Se muestra el último año disponible en la fuente (2025).
+- Cifras en miles de personas; la participación se calcula sobre el total
+  de ocupados del mismo año.
+
+Tabla 5. Inflación 2017-2026
+- DANE, IPC, archivo "IPC ciudades.xlsx".
+- Riohacha se usa como referencia de la capital, no como medición
+  departamental completa.
+- Los valores son el campo "año corrido" de la fuente; no equivalen
+  necesariamente a la inflación anual diciembre-diciembre.
+- El dato de 2026 es parcial: acumulado enero-septiembre. Se marca
+  con la etiqueta "ene-sep" en la tabla.
+
+Tabla 6. Tasa de desocupación (TD) 2016-2025
+- DANE, GEIH, serie departamental anual y serie nacional mensual.
+- Colombia se calcula como promedio anual de la tasa mensual con la
+  metodología vigente (CNPV 2018).
+- La comparación es referencial: la serie departamental es volátil y puede
+  reflejar cambios de composición y diferencias metodológicas.
+- La gráfica y la tabla usan la misma serie y la misma fuente.
+
+Tabla 6A. Desocupación por edad y sexo, 2025
+- DANE, GEIH 2025, microdatos mensuales.
+- Desocupación: archivo "No ocupados" con DSI = 1; ocupación: archivo
+  "Ocupados". Cálculos propios con el factor de expansión FEX_C18.
+- Las tasas por edad y sexo tienen muestras limitadas y pueden diferir de
+  la serie oficial de la Tabla 6. La categoría 65+ mujeres se marca porque
+  tiene muy pocos registros anuales.
+- El total oficial se incluye como fila de contraste, no como suma de las
+  estimaciones por edad.
+
+Tabla 7. Informalidad Q4 2016-2025
+- DANE, GEIH, empleo informal y seguridad social.
+- Se usa el trimestre octubre-diciembre (Q4) de cada año.
+- Riohacha se usa como referencia de la capital porque DANE no publica una
+  serie departamental comparable para todo el periodo.
+- La serie 2021+ incorpora la actualización metodológica de la GEIH; no es
+  estrictamente comparable con 2016-2020. El salto de 2021 refleja, en parte,
+  ese cambio metodológico.
+
+4.1. MAPA INTERACTIVO
+- Fuente: DANE, Marco Geoestadístico Nacional, División Político-Administrativa
+  2012, capas de municipios y departamentos.
+- Servicio:
+  https://portalgis.dane.gov.co/mparcgis/rest/services/INDICADORES_CTERRITORIO/Cache_MpiosCTDeptosAM_DivisionPolitica_2012/MapServer
+- Contenido: 15 municipios de La Guajira, contorno departamental y un inset
+  con los 33 departamentos de Colombia para ubicar el territorio.
+- Las geometrías fueron simplificadas para visualización web. Los límites son
+  de referencia y pueden diferir de demarcaciones posteriores; no constituyen
+  una delimitación oficial.
+- Riohacha se marca como capital con una estrella. La ubicación de la cabecera
+  es aproximada porque la capa oficial de capitales no devolvió geometría.
+- El archivo map_guajira.js expone window.GUAJIRA_MAP_DATA con las geometrías
+  y los metadatos. No se edita a mano: se regenera desde el servicio del DANE.
+- Las posiciones de las etiquetas del mapa están en la constante MAP_LABELS de
+  app.js. Si cambia la geometría o el número de municipios, revise esa lista y
+  el contador "15" que aparece en index.html.
+
+5. NOTAS METODOLÓGICAS IMPORTANTES
+----------------------------------
+- Los indicadores sociales provienen de años distintos. Cada celda indica el
+  año del dato; no se deben interpretar como si todos fueran del mismo año.
+- Las brechas de la Tabla 2 se calculan como La Guajira menos Colombia. En
+  pobreza y NBI, un valor positivo indica desventaja; en coberturas, un valor
+  negativo indica déficit.
+- La afiliación en salud no equivale a acceso efectivo ni a calidad de los
+  servicios.
+- El PIB corriente no mide crecimiento real. El salto nominal de 2022 está
+  asociado al choque de precios del carbón y no a un crecimiento real
+  equivalente.
+- La población puede variar ligeramente según la versión de las proyecciones
+  y la entidad que las publica. En esta página se usan las cifras de DANE y
+  DNP indicadas en la Tabla 1.
+- Las cifras preliminares pueden ser revisadas por las entidades fuente.
+
+6. ACTUALIZACIÓN DE DATOS
+-------------------------
+- Para actualizar IPC y empleo, reemplace los JSON o cambie las rutas en
+  config.js. La página los carga automáticamente.
+- Para actualizar PIB e informalidad, edite las secciones "pib" e
+  "informalidad" de data_guajira.json. Las gráficas y los KPI se actualizan
+  al recargar.
+- Si actualiza una serie, conserve el año y la fuente de cada cifra y revise
+  las notas metodológicas. Verifique que los totales y las participaciones
+  sigan siendo consistentes.
+- Para actualizar el mapa, descargue de nuevo las capas 4 (municipios) y 2
+  (departamentos) del servicio DANE indicado en 4.1, simplifique las
+  geometrías y regenere map_guajira.js conservando la estructura de
+  window.GUAJIRA_MAP_DATA. No modifique las geometrías a mano.
+
+7. ACCESIBILIDAD Y VISUALIZACIÓN
+--------------------------------
+- La página incluye navegación por teclado, enlace para saltar al contenido,
+  textos alternativos en las gráficas y estilos para movimiento reducido.
+- El diseño es responsive: se adapta a escritorio, tableta y móvil.
+- Las tablas tienen desplazamiento horizontal en pantallas pequeñas.
+- Las gráficas y el mapa se generan con SVG y no requieren librerías externas.
+- En el mapa, use Tab para recorrer los municipios, Enter o Espacio para
+  seleccionarlos y Escape para limpiar la selección. También puede usar la
+  lista de municipios y el botón "Limpiar selección".
+- En pantallas pequeñas se ocultan las etiquetas sobre el mapa para evitar
+  amontonamiento; los nombres siguen disponibles en la lista y en el panel.
+- Al imprimir, el mapa se conserva en una paleta clara y se ocultan el panel
+  lateral y la barra de herramientas del mapa.
+
+7.1. TEMA CLARO Y OSCURO
+- El botón "Modo oscuro" / "Modo claro" de la barra superior alterna el tema.
+- La preferencia se guarda en localStorage con la clave "guajira-theme".
+- Si no hay una preferencia guardada, se usa el ajuste del sistema operativo
+  (prefers-color-scheme). Si el sistema cambia de tema, la página lo sigue
+  siempre que el usuario no haya elegido manualmente.
+- Las gráficas SVG, el mapa, las tablas, tarjetas y avisos adaptan sus colores
+  al tema.
+- La impresión siempre usa una paleta clara para ahorrar tinta y facilitar la
+  lectura, aunque la página esté en modo oscuro.
+
+8. CRÉDITOS
+-----------
+Elaborado con fines académicos y de divulgación. Fuentes principales:
+DANE, DNP, Ministerio de Salud y Protección Social, Ministerio de Educación
+Nacional, IGAC y Alcaldía de Riohacha.
+
+Última actualización de datos: noviembre de 2026.

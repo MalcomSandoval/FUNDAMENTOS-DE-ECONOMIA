@@ -1,0 +1,1074 @@
+{
+  "meta": {
+    "departamento": "La Guajira",
+    "capital": "Riohacha",
+    "generado": "2026-11-06",
+    "fuentes": {
+      "ipc": "DANE - IPC ciudades (archivo IPC ciudades.xlsx)",
+      "empleo": "DANE - GEIH Departamentos (archivo Empleo departamentos.xls)",
+      "pib": "DANE - Cuentas Nacionales Departamentales, PIB 2025pr",
+      "informalidad": "DANE - GEIH, empleo informal y seguridad social (Q4 2016-2025)",
+      "poblacion": "DANE - Proyecciones de población 2018-2050; DNP - Programación presupuestal 2025",
+      "social": "DANE - Pobreza monetaria 2025; Pobreza multidimensional 2024; CNPV 2018 (NBI y servicios públicos)",
+      "mercado_laboral_sexo": "DANE - GEIH, mercado laboral por departamentos 2025 (Empleo departamentos.xls; boletín bol-GEIHDepartamentos-2025.pdf)",
+      "desempleo_edad_sexo": "DANE - GEIH 2025, microdatos mensuales (archivos Ocupados y No ocupados); cálculos propios con FEX_C18"
+    },
+    "actualizado": "2026-11-12"
+  },
+  "ipc": {
+    "source": "C:\\Users\\SOPORTE\\Pictures\\FUNDAMENTOS DE ECONOMIA\\IPC  ciudades.xlsx",
+    "note": "Variaciones mensuales IPC; year_to_date es 'Año corrido' de la fila (acumulado al mes disponible).",
+    "data": [
+      {
+        "year": 2017,
+        "scope": "Colombia",
+        "monthly": [
+          1.02,
+          1.01,
+          0.47,
+          0.47,
+          0.23,
+          0.11,
+          -0.05,
+          0.14,
+          0.04,
+          0.02,
+          0.18,
+          0.38
+        ],
+        "year_to_date": 4.09
+      },
+      {
+        "year": 2017,
+        "scope": "Riohacha",
+        "monthly": [
+          0.66,
+          -0.23,
+          0.21,
+          0.4,
+          0.09,
+          -0.31,
+          -0.29,
+          0.15,
+          0.14,
+          0.07,
+          0.16,
+          0.2
+        ],
+        "year_to_date": 1.28
+      },
+      {
+        "year": 2018,
+        "scope": "Colombia",
+        "monthly": [
+          0.63,
+          0.71,
+          0.24,
+          0.46,
+          0.25,
+          0.15,
+          -0.13,
+          0.12,
+          0.16,
+          0.12,
+          0.12,
+          0.3
+        ],
+        "year_to_date": 3.18
+      },
+      {
+        "year": 2018,
+        "scope": "Riohacha",
+        "monthly": [
+          0.41,
+          0.26,
+          -0.02,
+          0.71,
+          0.41,
+          -0.16,
+          -0.17,
+          0.25,
+          0.11,
+          0.36,
+          0.31,
+          0.32
+        ],
+        "year_to_date": 2.84
+      },
+      {
+        "year": 2019,
+        "scope": "Colombia",
+        "monthly": [
+          0.6,
+          0.57,
+          0.43,
+          0.5,
+          0.31,
+          0.27,
+          0.22,
+          0.09,
+          0.23,
+          0.16,
+          0.1,
+          0.26
+        ],
+        "year_to_date": 3.8
+      },
+      {
+        "year": 2019,
+        "scope": "Riohacha",
+        "monthly": [
+          0.25,
+          0.4,
+          0.41,
+          0.62,
+          0.23,
+          1.23,
+          0.47,
+          0.06,
+          -0.04,
+          0.25,
+          0.28,
+          0.52
+        ],
+        "year_to_date": 4.79
+      },
+      {
+        "year": 2020,
+        "scope": "Colombia",
+        "monthly": [
+          0.42,
+          0.67,
+          0.57,
+          0.16,
+          -0.32,
+          -0.38,
+          0.0,
+          -0.01,
+          0.32,
+          -0.06,
+          -0.15,
+          0.38
+        ],
+        "year_to_date": 1.61
+      },
+      {
+        "year": 2020,
+        "scope": "Riohacha",
+        "monthly": [
+          0.32,
+          0.56,
+          0.76,
+          1.04,
+          -0.21,
+          -0.08,
+          -0.31,
+          -0.42,
+          -0.18,
+          0.23,
+          -0.12,
+          0.7
+        ],
+        "year_to_date": 2.3
+      },
+      {
+        "year": 2021,
+        "scope": "Colombia",
+        "monthly": [
+          0.41,
+          0.64,
+          0.51,
+          0.59,
+          1.0,
+          -0.05,
+          0.32,
+          0.45,
+          0.38,
+          0.01,
+          0.5,
+          0.73
+        ],
+        "year_to_date": 5.62
+      },
+      {
+        "year": 2021,
+        "scope": "Riohacha",
+        "monthly": [
+          0.4,
+          0.18,
+          0.53,
+          0.8,
+          0.71,
+          0.03,
+          0.57,
+          0.27,
+          0.5,
+          -0.05,
+          0.52,
+          1.31
+        ],
+        "year_to_date": 5.92
+      },
+      {
+        "year": 2022,
+        "scope": "Colombia",
+        "monthly": [
+          1.67,
+          1.63,
+          1.0,
+          1.25,
+          0.84,
+          0.51,
+          0.81,
+          1.02,
+          0.93,
+          0.72,
+          0.77,
+          1.26
+        ],
+        "year_to_date": 13.12
+      },
+      {
+        "year": 2022,
+        "scope": "Riohacha",
+        "monthly": [
+          2.37,
+          1.99,
+          0.98,
+          1.41,
+          1.0,
+          -0.09,
+          1.48,
+          1.5,
+          1.09,
+          0.57,
+          0.93,
+          1.32
+        ],
+        "year_to_date": 15.52
+      },
+      {
+        "year": 2023,
+        "scope": "Colombia",
+        "monthly": [
+          1.78,
+          1.66,
+          1.05,
+          0.78,
+          0.43,
+          0.3,
+          0.5,
+          0.7,
+          0.54,
+          0.25,
+          0.47,
+          0.45
+        ],
+        "year_to_date": 9.28
+      },
+      {
+        "year": 2023,
+        "scope": "Riohacha",
+        "monthly": [
+          1.63,
+          1.16,
+          0.75,
+          0.96,
+          0.39,
+          0.04,
+          0.36,
+          0.98,
+          0.42,
+          0.52,
+          1.47,
+          0.34
+        ],
+        "year_to_date": 9.38
+      },
+      {
+        "year": 2024,
+        "scope": "Colombia",
+        "monthly": [
+          0.92,
+          1.09,
+          0.7,
+          0.59,
+          0.43,
+          0.32,
+          0.2,
+          0.0,
+          0.24,
+          -0.13,
+          0.27,
+          0.46
+        ],
+        "year_to_date": 5.2
+      },
+      {
+        "year": 2024,
+        "scope": "Riohacha",
+        "monthly": [
+          1.36,
+          1.45,
+          0.31,
+          0.73,
+          0.02,
+          -0.25,
+          0.3,
+          0.0,
+          -0.02,
+          -0.86,
+          0.21,
+          0.75
+        ],
+        "year_to_date": 4.06
+      },
+      {
+        "year": 2025,
+        "scope": "Colombia",
+        "monthly": [
+          0.94,
+          1.14,
+          0.52,
+          0.66,
+          0.32,
+          0.1,
+          0.28,
+          0.19,
+          0.32,
+          0.18,
+          0.07,
+          0.27
+        ],
+        "year_to_date": 5.1
+      },
+      {
+        "year": 2025,
+        "scope": "Riohacha",
+        "monthly": [
+          0.48,
+          0.92,
+          0.66,
+          0.68,
+          0.23,
+          0.27,
+          0.22,
+          -0.03,
+          0.11,
+          0.02,
+          0.14,
+          0.3
+        ],
+        "year_to_date": 4.06
+      },
+      {
+        "year": 2026,
+        "scope": "Colombia",
+        "monthly": [
+          1.18,
+          1.08,
+          0.78,
+          0.78,
+          0.47,
+          0.39,
+          0.17,
+          0.39,
+          0.37,
+          null,
+          null,
+          null
+        ],
+        "year_to_date": 5.74
+      },
+      {
+        "year": 2026,
+        "scope": "Riohacha",
+        "monthly": [
+          0.92,
+          0.59,
+          0.19,
+          0.45,
+          0.06,
+          0.34,
+          0.46,
+          0.71,
+          0.27,
+          null,
+          null,
+          null
+        ],
+        "year_to_date": 4.06
+      }
+    ]
+  },
+  "empleo": {
+    "departamento": "La Guajira",
+    "years": [
+      "2007",
+      "2008",
+      "2009",
+      "2010",
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "indicators": {
+      "% población en edad de trabajar": [
+        "60.8",
+        "61.1",
+        "61.3",
+        "61.6",
+        "61.9",
+        "62.3",
+        "62.7",
+        "63.1",
+        "63.5",
+        "64.0",
+        "64.5",
+        "65.1",
+        "65.7",
+        "66.3",
+        "66.7",
+        "67.1",
+        "67.5",
+        "67.9",
+        "68.4"
+      ],
+      "Tasa Global de Participación (TGP)": [
+        "53.5",
+        "54.1",
+        "65.9",
+        "73.3",
+        "71.5",
+        "82.2",
+        "79.1",
+        "78.8",
+        "81.6",
+        "82.3",
+        "85.3",
+        "86.3",
+        "83.3",
+        "76.3",
+        "72.0",
+        "67.6",
+        "62.4",
+        "60.6",
+        "62.1"
+      ],
+      "Tasa de Ocupación (TO)": [
+        "44.8",
+        "45.3",
+        "59.2",
+        "66.7",
+        "65.2",
+        "75.6",
+        "73.7",
+        "74.1",
+        "76.0",
+        "75.5",
+        "80.7",
+        "83.5",
+        "79.1",
+        "69.4",
+        "68.2",
+        "61.5",
+        "53.3",
+        "53.5",
+        "54.4"
+      ],
+      "Tasa de Desocupación (TD)": [
+        "16.3",
+        "16.3",
+        "10.2",
+        "8.9",
+        "8.7",
+        "8.1",
+        "6.8",
+        "5.9",
+        "6.9",
+        "8.2",
+        "5.4",
+        "3.2",
+        "5.0",
+        "9.1",
+        "5.2",
+        "8.9",
+        "14.5",
+        "11.6",
+        "12.3"
+      ],
+      "Tasa de Subocupación (TS)": [
+        "10.1",
+        "7.4",
+        "8.8",
+        "11.4",
+        "6.1",
+        "10.3",
+        "10.1",
+        "10.8",
+        "12.4",
+        "12.7",
+        "13.8",
+        "14.9",
+        "15.3",
+        "-",
+        "10.8",
+        "7.8",
+        "8.6",
+        "9.2",
+        "9.5"
+      ]
+    },
+    "nacional": {
+      "indicators": {
+        "Tasa de Desocupación (TD)": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          9.5,
+          9.7,
+          10.0,
+          10.9,
+          16.5,
+          13.8,
+          11.2,
+          10.2,
+          10.2,
+          8.9
+        ]
+      },
+      "source": "DANE - GEIH, serie nacional mensual; promedio anual calculado para 2016-2025",
+      "note": "Serie nacional calculada como promedio anual de la tasa mensual (metodología CNPV 2018). Se usa como referencia frente a la serie departamental de La Guajira."
+    }
+  },
+  "ramas": {
+    "years": [
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "data": {
+      "Total ocupados": [
+        "388",
+        "397",
+        "440",
+        "477",
+        "481",
+        "443",
+        "449",
+        "414",
+        "366",
+        "374",
+        "388"
+      ],
+      "No informa": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "Agricultura, ganadería, caza, silvicultura y pesca": [
+        "71",
+        "67",
+        "83",
+        "99",
+        "100",
+        "98",
+        "78",
+        "75",
+        "58",
+        "53",
+        "60"
+      ],
+      "Explotación de minas y canteras": [
+        "8",
+        "7",
+        "8",
+        "9",
+        "9",
+        "10",
+        "6",
+        "5",
+        "4",
+        "6",
+        "7"
+      ],
+      "Industrias manufactureras": [
+        "84",
+        "102",
+        "113",
+        "121",
+        "96",
+        "87",
+        "120",
+        "101",
+        "74",
+        "69",
+        "72"
+      ],
+      "Suministro de electricidad, gas, agua y gestión de desechos": [
+        "3",
+        "3",
+        "3",
+        "3",
+        "4",
+        "4",
+        "4",
+        "5",
+        "4",
+        "5",
+        "6"
+      ],
+      "Construcción": [
+        "18",
+        "17",
+        "17",
+        "17",
+        "24",
+        "23",
+        "32",
+        "27",
+        "23",
+        "23",
+        "28"
+      ],
+      "Comercio y reparación de vehículos": [
+        "64",
+        "65",
+        "63",
+        "72",
+        "71",
+        "68",
+        "54",
+        "54",
+        "47",
+        "55",
+        "46"
+      ],
+      "Alojamiento y servicios de comida": [
+        "22",
+        "24",
+        "29",
+        "27",
+        "32",
+        "29",
+        "26",
+        "23",
+        "21",
+        "24",
+        "23"
+      ],
+      "Transporte y almacenamiento": [
+        "38",
+        "38",
+        "38",
+        "44",
+        "49",
+        "45",
+        "47",
+        "45",
+        "48",
+        "43",
+        "49"
+      ],
+      "Información y comunicaciones": [
+        "4",
+        "3",
+        "4",
+        "3",
+        "3",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1"
+      ],
+      "Actividades financieras y de seguros": [
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "2"
+      ],
+      "Actividades inmobiliarias": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "Actividades profesionales, científicas, técnicas y de servicios administrativos": [
+        "8",
+        "8",
+        "8",
+        "8",
+        "8",
+        "10",
+        "16",
+        "13",
+        "13",
+        "10",
+        "13"
+      ],
+      "Administración pública y defensa, educación y atención de la salud humana": [
+        "42",
+        "37",
+        "45",
+        "46",
+        "51",
+        "39",
+        "36",
+        "32",
+        "43",
+        "45",
+        "45"
+      ],
+      "Actividades artísticas, entretenimiento, recreación y otras actividades de servicios": [
+        "25",
+        "25",
+        "27",
+        "26",
+        "31",
+        "28",
+        "27",
+        "31",
+        "27",
+        "35",
+        "36"
+      ]
+    }
+  },
+  "pib": {
+    "source": "DANE - Cuentas Nacionales Departamentales, PIB departamental 2025pr",
+    "note": "PIB a precios corrientes (billones de pesos, base 2015). Crecimiento real calculado con la serie de volumen. 2024p preliminar; 2025pr preliminar revisado. Participación = PIB La Guajira / PIB Colombia.",
+    "data": [
+      {
+        "year": 2016,
+        "pib_dep": 9.4423,
+        "pib_col": 863.782,
+        "crecimiento_dep": 2.6,
+        "crecimiento_col": 2.09,
+        "participacion": 1.09
+      },
+      {
+        "year": 2017,
+        "pib_dep": 10.7846,
+        "pib_col": 920.471,
+        "crecimiento_dep": 1.18,
+        "crecimiento_col": 1.36,
+        "participacion": 1.17
+      },
+      {
+        "year": 2018,
+        "pib_dep": 11.8819,
+        "pib_col": 987.791,
+        "crecimiento_dep": -0.21,
+        "crecimiento_col": 2.56,
+        "participacion": 1.2
+      },
+      {
+        "year": 2019,
+        "pib_dep": 11.2251,
+        "pib_col": 1060.068,
+        "crecimiento_dep": -0.24,
+        "crecimiento_col": 3.19,
+        "participacion": 1.06
+      },
+      {
+        "year": 2020,
+        "pib_dep": 8.7088,
+        "pib_col": 998.471,
+        "crecimiento_dep": -23.57,
+        "crecimiento_col": -7.19,
+        "participacion": 0.87
+      },
+      {
+        "year": 2021,
+        "pib_dep": 14.4725,
+        "pib_col": 1192.634,
+        "crecimiento_dep": 28.08,
+        "crecimiento_col": 10.8,
+        "participacion": 1.21
+      },
+      {
+        "year": 2022,
+        "pib_dep": 22.8801,
+        "pib_col": 1471.079,
+        "crecimiento_dep": -2.86,
+        "crecimiento_col": 7.33,
+        "participacion": 1.56
+      },
+      {
+        "year": 2023,
+        "pib_dep": 20.4833,
+        "pib_col": 1587.2,
+        "crecimiento_dep": 1.38,
+        "crecimiento_col": 0.84,
+        "participacion": 1.29
+      },
+      {
+        "year": 2024,
+        "pib_dep": 18.2582,
+        "pib_col": 1713.316,
+        "crecimiento_dep": -1.2,
+        "crecimiento_col": 1.49,
+        "participacion": 1.07
+      },
+      {
+        "year": 2025,
+        "pib_dep": 17.7564,
+        "pib_col": 1852.67,
+        "crecimiento_dep": -1.59,
+        "crecimiento_col": 2.57,
+        "participacion": 0.96
+      }
+    ]
+  },
+  "informalidad": {
+    "source": "DANE - GEIH, empleo informal y seguridad social (anexos 2019, 2020 y 2026)",
+    "note": "Tasa de informalidad laboral (proporción de ocupados informales) en el trimestre octubre-diciembre (Q4). Riohacha se usa como referencia de la capital. La serie 2021+ incorpora la actualización metodológica de la GEIH, por lo que no es estrictamente comparable con 2016-2020.",
+    "data": [
+      {
+        "year": 2016,
+        "riohacha": 62.46,
+        "ciudades23": 48.67,
+        "brecha": 13.79
+      },
+      {
+        "year": 2017,
+        "riohacha": 63.52,
+        "ciudades23": 48.3,
+        "brecha": 15.22
+      },
+      {
+        "year": 2018,
+        "riohacha": 62.11,
+        "ciudades23": 48.16,
+        "brecha": 13.95
+      },
+      {
+        "year": 2019,
+        "riohacha": 61.71,
+        "ciudades23": 47.61,
+        "brecha": 14.1
+      },
+      {
+        "year": 2020,
+        "riohacha": 59.23,
+        "ciudades23": 48.97,
+        "brecha": 10.26
+      },
+      {
+        "year": 2021,
+        "riohacha": 68.26,
+        "ciudades23": 45.71,
+        "brecha": 22.55
+      },
+      {
+        "year": 2022,
+        "riohacha": 67.94,
+        "ciudades23": 44.26,
+        "brecha": 23.68
+      },
+      {
+        "year": 2023,
+        "riohacha": 61.01,
+        "ciudades23": 42.97,
+        "brecha": 18.04
+      },
+      {
+        "year": 2024,
+        "riohacha": 61.79,
+        "ciudades23": 43.76,
+        "brecha": 18.03
+      },
+      {
+        "year": 2025,
+        "riohacha": 61.37,
+        "ciudades23": 43.61,
+        "brecha": 17.76
+      }
+    ]
+  },
+  "mercado_laboral_sexo": {
+    "year": 2025,
+    "source": "DANE - GEIH, mercado laboral por departamentos 2025 (Empleo departamentos.xls; boletín bol-GEIHDepartamentos-2025.pdf)",
+    "note": "Cifras en miles de personas, excepto las tasas (%). La población corresponde a la expansión de la GEIH y no a la proyección de población de la Tabla 1. Brecha = mujeres - hombres; en tasas se expresa en puntos porcentuales.",
+    "rows": [
+      {
+        "indicador": "Población total",
+        "tipo": "nivel",
+        "total": 1041,
+        "hombres": 509,
+        "mujeres": 532
+      },
+      {
+        "indicador": "Población en edad de trabajar (PET)",
+        "tipo": "nivel",
+        "total": 713,
+        "hombres": 343,
+        "mujeres": 370
+      },
+      {
+        "indicador": "Fuerza de trabajo",
+        "tipo": "nivel",
+        "total": 442,
+        "hombres": 252,
+        "mujeres": 190
+      },
+      {
+        "indicador": "Población ocupada",
+        "tipo": "nivel",
+        "total": 388,
+        "hombres": 228,
+        "mujeres": 160
+      },
+      {
+        "indicador": "Población desocupada",
+        "tipo": "nivel",
+        "total": 54,
+        "hombres": 24,
+        "mujeres": 30
+      },
+      {
+        "indicador": "Población fuera de la fuerza de trabajo",
+        "tipo": "nivel",
+        "total": 270,
+        "hombres": 90,
+        "mujeres": 180
+      },
+      {
+        "indicador": "Población subocupada",
+        "tipo": "nivel",
+        "total": 42,
+        "hombres": 25,
+        "mujeres": 17
+      },
+      {
+        "indicador": "Tasa global de participación",
+        "tipo": "tasa",
+        "total": 62.1,
+        "hombres": 73.6,
+        "mujeres": 51.3
+      },
+      {
+        "indicador": "Tasa de ocupación",
+        "tipo": "tasa",
+        "total": 54.4,
+        "hombres": 66.5,
+        "mujeres": 43.2
+      },
+      {
+        "indicador": "Tasa de desocupación",
+        "tipo": "tasa",
+        "total": 12.3,
+        "hombres": 9.7,
+        "mujeres": 15.8,
+        "brecha": 6.2
+      },
+      {
+        "indicador": "Tasa de subocupación",
+        "tipo": "tasa",
+        "total": 9.5,
+        "hombres": 10.0,
+        "mujeres": 8.9
+      }
+    ]
+  },
+  "desempleo_edad_sexo": {
+    "year": 2025,
+    "source": "DANE - GEIH 2025, microdatos mensuales (archivos Ocupados y No ocupados); cálculos propios con FEX_C18",
+    "note": "Estimaciones por edad y sexo con muestras limitadas; pueden diferir de la serie oficial de la Tabla 6. La categoría 65+ mujeres tiene muy pocos registros anuales.",
+    "oficial": {
+      "total": 12.3,
+      "hombres": 9.7,
+      "mujeres": 15.8,
+      "brecha": 6.2
+    },
+    "data": [
+      {
+        "age": "15–24",
+        "total": 16.6,
+        "hombres": 15.7,
+        "mujeres": 17.6
+      },
+      {
+        "age": "25–34",
+        "total": 15.0,
+        "hombres": 12.0,
+        "mujeres": 18.9
+      },
+      {
+        "age": "35–44",
+        "total": 11.2,
+        "hombres": 6.6,
+        "mujeres": 16.4
+      },
+      {
+        "age": "45–54",
+        "total": 9.4,
+        "hombres": 7.6,
+        "mujeres": 11.9
+      },
+      {
+        "age": "55–64",
+        "total": 5.2,
+        "hombres": 5.6,
+        "mujeres": 4.6
+      },
+      {
+        "age": "65+",
+        "total": 2.0,
+        "hombres": 2.6,
+        "mujeres": 1.1,
+        "muestra_baja": true
+      }
+    ]
+  }
+}

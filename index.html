@@ -1,0 +1,1317 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Diagnóstico socioeconómico y macroeconómico de La Guajira y Riohacha: población, pobreza, PIB, inflación, desempleo, informalidad y mapa interactivo de sus municipios con datos oficiales." />
+  <meta name="theme-color" content="#0b1f3a" />
+  <meta name="color-scheme" content="light dark" />
+  <title>La Guajira en cifras · Diagnóstico socioeconómico y macroeconómico</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <script>
+    /* Aplica el tema guardado antes de pintar para evitar destellos. */
+    (function () {
+      try {
+        var saved = localStorage.getItem("guajira-theme");
+        var theme = saved === "dark" || saved === "light"
+          ? saved
+          : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", theme === "dark" ? "#0b1220" : "#0b1f3a");
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="config.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#inicio">Saltar al contenido principal</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio">
+        <span class="brand-mark" aria-hidden="true">LG</span>
+        <span class="brand-text">
+          <strong>La Guajira en cifras</strong>
+          <small>Diagnóstico socioeconómico y macroeconómico</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#presentacion">Presentación</a>
+        <a href="#pib">PIB</a>
+        <a href="#inflacion">Inflación</a>
+        <a href="#desempleo">Empleo</a>
+        <a href="#diagnostico">Diagnóstico</a>
+        <a href="#conclusiones">Conclusiones</a>
+        <a href="#fuentes">Fuentes</a>
+        <a href="#datos">Datos</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Activar modo oscuro" title="Activar modo oscuro">
+        <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+        <span class="theme-toggle-text">Modo oscuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <!-- ================= HÉROE ================= -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow">Diagnóstico territorial · Colombia · 2026</span>
+        <h1 id="hero-title">La Guajira en cifras: <span class="grad">territorio, brechas y oportunidades</span></h1>
+        <p class="lead">
+          Un recorrido por la estructura socioeconómica del departamento y de su capital, Riohacha.
+          Compare la evolución del PIB, la inflación, el desempleo y la informalidad, y explore las
+          brechas sociales frente al promedio nacional con datos oficiales de DANE, DNP, MinSalud y MinEducación.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#presentacion">Explorar el diagnóstico</a>
+          <a class="btn btn-ghost" href="#fuentes">Ver fuentes y notas</a>
+        </div>
+        <div class="hero-chips" aria-label="Datos generales">
+          <span class="chip">Capital: Riohacha</span>
+          <span class="chip">15 municipios</span>
+          <span class="chip">Población 2025: 1.073.851</span>
+          <span class="chip">Series 2016–2026</span>
+        </div>
+      </div>
+
+      <aside class="hero-panel" aria-label="Indicadores clave">
+        <div class="hero-panel-head">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Indicadores clave</span>
+          <span class="badge badge-live">Último dato disponible</span>
+        </div>
+        <div id="kpis" class="kpi-grid" aria-live="polite">
+          <div class="kpi kpi-danger"><div class="k">Pobreza monetaria</div><div class="v">60,2%</div><div class="meta">La Guajira · 2025 · Colombia 28,0%</div></div>
+          <div class="kpi kpi-warn"><div class="k">Desempleo</div><div class="v">12,3%</div><div class="meta">La Guajira · 2025 · Colombia 8,9%</div></div>
+          <div class="kpi kpi-brand"><div class="k">PIB departamental</div><div class="v">17,76</div><div class="meta">Billones de $ · 2025pr · 0,96% nacional</div></div>
+          <div class="kpi kpi-sky"><div class="k">Informalidad</div><div class="v">61,37%</div><div class="meta">Riohacha · Q4 2025 · 23 ciudades 43,61%</div></div>
+        </div>
+        <p class="hero-panel-note">
+          Cifras de la última publicación disponible. El año y la fuente se indican en cada tabla y tarjeta.
+          Los datos de IPC y empleo se cargan dinámicamente desde archivos JSON.
+        </p>
+      </aside>
+    </section>
+
+    <!-- ================= PRESENTACIÓN ================= -->
+    <section class="section" id="presentacion" aria-labelledby="presentacion-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">01 · Territorio</span>
+          <h2 id="presentacion-title">Presentación general</h2>
+        </div>
+        <p class="section-sub">
+          La Guajira es el departamento más septentrional de Colombia y Suramérica. Su ubicación fronteriza,
+          su diversidad cultural y su base de recursos naturales conviven con brechas persistentes de bienestar,
+          servicios básicos y empleo formal.
+        </p>
+      </div>
+
+      <article class="card map-card" aria-labelledby="map-title">
+        <div class="card-head">
+          <div>
+            <h3 id="map-title">Mapa interactivo de La Guajira</h3>
+            <p class="map-subtitle">15 municipios · División Político-Administrativa 2012 del DANE</p>
+          </div>
+          <span class="badge blue">DANE · Geometría oficial</span>
+        </div>
+
+        <div class="map-layout">
+          <div class="map-canvas">
+            <div
+              id="map-guajira"
+              class="map-svg-wrap"
+              role="group"
+              aria-label="Mapa interactivo de los municipios de La Guajira. Use Tab para recorrer los municipios y Enter o Espacio para seleccionarlos."
+            >
+              <noscript>Active JavaScript para visualizar el mapa interactivo de La Guajira.</noscript>
+            </div>
+            <div class="map-toolbar">
+              <span class="map-legend"><i class="legend-swatch muni-swatch" aria-hidden="true"></i> Municipio</span>
+              <span class="map-legend"><i class="legend-swatch capital" aria-hidden="true"></i> Capital: Riohacha</span>
+              <button class="map-reset" id="map-reset" type="button">Limpiar selección</button>
+            </div>
+          </div>
+
+          <aside class="map-panel" aria-label="Información del municipio seleccionado">
+            <div class="map-info" id="map-status" aria-live="polite">
+              <span class="map-info-kicker">Departamento</span>
+              <strong class="map-info-title" id="map-info-title">La Guajira</strong>
+              <span class="map-info-code" id="map-info-code">15 municipios · DANE</span>
+              <p class="map-info-note" id="map-info-note">
+                Pasa el cursor, toca un municipio o usa la lista para identificarlo en el mapa.
+              </p>
+            </div>
+            <div class="map-list-head">
+              <span>Municipios</span>
+              <span class="map-list-count">15</span>
+            </div>
+            <div class="map-list" id="map-list" role="group" aria-label="Lista de municipios de La Guajira"></div>
+            <p class="map-hint" id="map-help">
+              Los nombres del mapa son etiquetas de referencia. Los límites corresponden a la división
+              político-administrativa de 2012 y pueden diferir de demarcaciones posteriores.
+            </p>
+          </aside>
+        </div>
+
+        <p class="source map-source">
+          <strong>Fuente:</strong> DANE, Marco Geoestadístico Nacional, División Político-Administrativa 2012
+          (<a href="https://portalgis.dane.gov.co/mparcgis/rest/services/INDICADORES_CTERRITORIO/Cache_MpiosCTDeptosAM_DivisionPolitica_2012/MapServer" target="_blank" rel="noopener noreferrer">servicio MapServer</a>,
+          consultado en noviembre de 2026). Geometrías simplificadas para visualización web.
+          La ubicación de la cabecera de Riohacha es aproximada.
+        </p>
+      </article>
+
+      <div class="grid-2" style="margin-top:18px">
+        <article class="card">
+          <div class="card-head">
+            <h3>Contexto geográfico y cultural</h3>
+            <span class="badge green">Síntesis</span>
+          </div>
+          <p>
+            Departamento fronterizo con el mar Caribe y Venezuela; limita con Cesar y Magdalena.
+            Riohacha, su capital, se localiza sobre la costa y la desembocadura del río Ranchería.
+            En el territorio conviven el pueblo wayuu y otros grupos indígenas; el wayuunaiki y el
+            español coexisten en la vida cotidiana.
+          </p>
+          <div class="map-facts">
+            <div><span>Capital</span><strong>Riohacha</strong></div>
+            <div><span>Municipios</span><strong>15</strong></div>
+            <div><span>Extensión</span><strong>20.848 km² <span class="year-tag">IGAC 2024</span></strong></div>
+            <div><span>Población</span><strong>1.073.851 <span class="year-tag">DANE 2025</span></strong></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h3>Aspectos clave</h3>
+            <span class="badge green">Síntesis</span>
+          </div>
+          <ul class="list-check">
+            <li><strong>Territorio extenso y disperso:</strong> 20.848 km² y 15 municipios, con una parte importante de población rural.</li>
+            <li><strong>Diversidad étnica:</strong> presencia del pueblo wayuu y de otros grupos indígenas; el wayuunaiki y el español coexisten en el territorio.</li>
+            <li><strong>Base económica:</strong> minería del carbón, comercio, turismo, agricultura, pesca y servicios.</li>
+            <li><strong>Ubicación estratégica:</strong> frontera con Venezuela, costa Caribe y conexión con los mercados del norte del país.</li>
+            <li><strong>Retos sociales:</strong> pobreza, necesidades básicas insatisfechas y acceso limitado a agua potable y saneamiento.</li>
+          </ul>
+        </article>
+      </div>
+
+      <article class="card" style="margin-top:18px">
+        <div class="card-head">
+          <h3>Tabla 1. Caracterización general de La Guajira y Riohacha</h3>
+          <span class="badge">DANE · DNP · IGAC · Alcaldía</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Indicador</th>
+                <th scope="col">La Guajira</th>
+                <th scope="col">Riohacha (capital)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Ubicación geográfica</strong></td>
+                <td>Extremo norte de Colombia y Suramérica; limita con el mar Caribe, Venezuela, Cesar y Magdalena.</td>
+                <td>Noroccidente del departamento, sobre la costa Caribe y la desembocadura del río Ranchería.</td>
+              </tr>
+              <tr>
+                <td><strong>Extensión territorial</strong></td>
+                <td>20.848 km² <span class="year-tag">IGAC 2024</span></td>
+                <td>3.084,45 km² <span class="year-tag">2024</span></td>
+              </tr>
+              <tr>
+                <td><strong>Población total</strong></td>
+                <td>1.073.851 hab. <span class="year-tag">2025</span></td>
+                <td>210.871 hab. <span class="year-tag">2025</span></td>
+              </tr>
+              <tr>
+                <td><strong>Población urbana (cabecera)</strong></td>
+                <td>550.147 hab. <span class="year-tag">2025</span></td>
+                <td>153.756 hab. <span class="year-tag">2025</span></td>
+              </tr>
+              <tr>
+                <td><strong>Población rural</strong> (centros poblados y rural disperso)</td>
+                <td>523.704 hab. <span class="year-tag">2025</span></td>
+                <td>57.115 hab. <span class="year-tag">2025</span></td>
+              </tr>
+              <tr>
+                <td><strong>Número de municipios</strong></td>
+                <td>15 municipios <span class="year-tag">2025</span></td>
+                <td>No aplica (capital municipal)</td>
+              </tr>
+              <tr>
+                <td><strong>Densidad poblacional</strong></td>
+                <td>51,5 hab./km² <span class="year-tag">2025</span></td>
+                <td>68,4 hab./km² <span class="year-tag">2025</span></td>
+              </tr>
+              <tr>
+                <td><strong>Participación en el PIB nacional</strong></td>
+                <td>0,96 % <span class="year-tag">2025pr</span></td>
+                <td>No disponible desagregado</td>
+              </tr>
+              <tr>
+                <td><strong>Actividades económicas principales</strong></td>
+                <td>Minería del carbón, comercio, turismo, agricultura, pesca y servicios.</td>
+                <td>Comercio, servicios, turismo, pesca y administración pública.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source">
+          <strong>Fuentes:</strong> DANE, proyecciones de población 2018–2050 y proyección municipal 2025;
+          DNP, Programación presupuestal 2025 (población); DANE, DIVIPOLA 2025; IGAC, extensión territorial;
+          Alcaldía de Riohacha, Información del Municipio (extensión); DANE, Cuentas Nacionales Departamentales, PIB 2025pr.
+          <br><strong>Nota:</strong> las proyecciones de población pueden variar ligeramente según la versión y la entidad que las publica.
+          La densidad se calcula con la población y la extensión indicadas.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Tabla 1A. Mercado laboral de La Guajira por sexo, 2025</h3>
+          <span class="badge">DANE · GEIH 2025</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Indicador</th>
+                <th scope="col" class="num">Total</th>
+                <th scope="col" class="num">Hombres</th>
+                <th scope="col" class="num">Mujeres</th>
+                <th scope="col" class="num">Brecha<br><span class="table-sub">mujeres − hombres</span></th>
+              </tr>
+            </thead>
+            <tbody id="tabla-sexo">
+              <tr><td colspan="5" class="chart-empty">Cargando indicadores por sexo…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source">
+          <strong>Fuente:</strong> DANE, Gran Encuesta Integrada de Hogares (GEIH), mercado laboral por
+          departamentos 2025. Totales, hombres y mujeres de <code>Empleo departamentos.xls</code>
+          (hojas “Departamentos anual”, “Departamentos anual hombres” y “Departamentos anual mujeres”),
+          contrastados con el boletín <code>bol-GEIHDepartamentos-2025.pdf</code>.
+          <br><strong>Nota:</strong> las cifras de población y de fuerza de trabajo están en miles de personas;
+          las tasas se expresan en porcentaje. La población corresponde a la expansión de la GEIH y no a la
+          proyección de población de la Tabla 1, por lo que puede diferir. La brecha se calcula como mujeres
+          menos hombres; en las tasas se expresa en puntos porcentuales (p.p.). Para la tasa de desocupación se
+          usa la brecha oficial del boletín (6,2 p.p.), que puede diferir de la resta de cifras redondeadas.
+        </p>
+      </article>
+
+      <div class="insight">
+        <span class="icon" aria-hidden="true">💡</span>
+        <div>
+          <h3>Una población mayoritariamente rural y dispersa</h3>
+          <p>
+            Con 523.704 personas en centros poblados y rural disperso, cerca del <strong>48,8 %</strong> de la
+            población de La Guajira vive por fuera de las cabeceras municipales. Esa dispersión encarece la
+            provisión de agua, saneamiento, energía y servicios de salud, y ayuda a explicar parte de las
+            brechas que se presentan en la Tabla 2.
+          </p>
+        </div>
+      </div>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Tabla 2. Indicadores sociales: La Guajira frente a Colombia</h3>
+          <span class="badge amber">Años distintos según fuente</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Indicador <span class="table-sub">último dato disponible</span></th>
+                <th scope="col" class="num">La Guajira</th>
+                <th scope="col" class="num">Colombia</th>
+                <th scope="col" class="num">Brecha (p.p.)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pobreza monetaria <span class="year-tag">2025</span></td>
+                <td class="num">60,2 %</td>
+                <td class="num">28,0 %</td>
+                <td class="num delta bad">+32,2</td>
+              </tr>
+              <tr>
+                <td>Pobreza extrema monetaria <span class="year-tag">2025</span></td>
+                <td class="num">33,8 %</td>
+                <td class="num">9,6 %</td>
+                <td class="num delta bad">+24,2</td>
+              </tr>
+              <tr>
+                <td>Pobreza multidimensional <span class="year-tag">2024</span></td>
+                <td class="num">39,3 %</td>
+                <td class="num">11,5 %</td>
+                <td class="num delta bad">+27,8</td>
+              </tr>
+              <tr>
+                <td>Necesidades Básicas Insatisfechas (NBI) <span class="year-tag">2018</span></td>
+                <td class="num">53,3 %</td>
+                <td class="num">14,3 %</td>
+                <td class="num delta bad">+39,0</td>
+              </tr>
+              <tr>
+                <td>Cobertura neta en educación media <span class="year-tag">2022</span></td>
+                <td class="num">48,7 %</td>
+                <td class="num">49,7 %</td>
+                <td class="num delta bad">−1,0</td>
+              </tr>
+              <tr>
+                <td>Afiliación en salud (SGSSS) <span class="year-tag">2025</span></td>
+                <td class="num">100,0 %</td>
+                <td class="num">98,6 %</td>
+                <td class="num delta good">+1,4</td>
+              </tr>
+              <tr>
+                <td>Cobertura de acueducto <span class="year-tag">2018</span></td>
+                <td class="num">46,6 %</td>
+                <td class="num">86,4 %</td>
+                <td class="num delta bad">−39,8</td>
+              </tr>
+              <tr>
+                <td>Cobertura de alcantarillado <span class="year-tag">2018</span></td>
+                <td class="num">41,9 %</td>
+                <td class="num">76,6 %</td>
+                <td class="num delta bad">−34,7</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source">
+          <strong>Fuentes:</strong> DANE, Pobreza monetaria departamental 2025; DANE, Pobreza multidimensional 2024;
+          DANE, CNPV 2018 (NBI actualizado 2021 y cobertura de servicios públicos); Ministerio de Educación Nacional
+          y Fundación Empresarios por la Educación (cobertura neta en media 2022); Ministerio de Salud y Protección
+          Social, BDUA / Así Vamos en Salud (afiliación 2025).
+          <br><strong>Nota:</strong> la brecha se calcula como La Guajira menos Colombia. En pobreza y NBI, un valor
+          positivo indica desventaja; en coberturas, un valor negativo indica déficit. Los años difieren porque cada
+          indicador proviene de la última operación estadística disponible. La afiliación en salud no equivale a acceso
+          efectivo a servicios.
+        </p>
+      </article>
+
+      <div class="insight danger">
+        <span class="icon" aria-hidden="true">⚠️</span>
+        <div>
+          <h3>Brechas sociales severas y persistentes</h3>
+          <p>
+            La pobreza monetaria de La Guajira <strong>(60,2 % en 2025)</strong> es más del doble del promedio
+            nacional, y la pobreza extrema <strong>(33,8 %)</strong> triplica la del país. El NBI de 2018
+            <strong>(53,3 %)</strong> se ubica 39 puntos por encima de Colombia, mientras que las coberturas de
+            acueducto <strong>(46,6 %)</strong> y alcantarillado <strong>(41,9 %)</strong> equivalen a poco más de
+            la mitad del promedio nacional. La afiliación en salud es alta, pero no garantiza por sí sola el acceso
+            efectivo ni la calidad de los servicios.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VARIABLES ================= -->
+    <section class="section" id="variables" aria-labelledby="variables-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">02 · Ruta de análisis</span>
+          <h2 id="variables-title">Variables económicas</h2>
+        </div>
+        <p class="section-sub">
+          El análisis combina tres miradas complementarias: la producción (PIB), los precios (inflación) y el
+          mercado laboral (desempleo e informalidad). Cada una se presenta con su año, fuente y limitaciones.
+        </p>
+      </div>
+      <div class="grid-3">
+        <a class="variable-card" href="#pib">
+          <span class="variable-icon" aria-hidden="true">📈</span>
+          <h3>Producto Interno Bruto</h3>
+          <p>PIB corriente, crecimiento real y participación de La Guajira en la economía nacional, 2016–2025.</p>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="variable-card" href="#inflacion">
+          <span class="variable-icon" aria-hidden="true">🛒</span>
+          <h3>Inflación</h3>
+          <p>Variación de precios en Riohacha y Colombia, con la salvedad metodológica del IPC y el año corrido.</p>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="variable-card" href="#desempleo">
+          <span class="variable-icon" aria-hidden="true">👷</span>
+          <h3>Empleo e informalidad</h3>
+          <p>Tasa de desocupación departamental y comparación de la informalidad de Riohacha con las 23 ciudades.</p>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= PIB ================= -->
+    <section class="section" id="pib" aria-labelledby="pib-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">03 · Macroeconomía</span>
+          <h2 id="pib-title">Producto Interno Bruto</h2>
+        </div>
+        <p class="section-sub">
+          La economía departamental está marcada por la minería del carbón y por una alta volatilidad de precios.
+          Su participación en el PIB nacional ronda el 1 %, y el crecimiento real ha alternado rebotes y contracciones.
+        </p>
+      </div>
+
+      <div class="stat-strip">
+        <div class="stat accent-teal">
+          <div class="label">PIB 2025pr</div>
+          <div class="value">$17,76 billones</div>
+          <div class="sub">Precios corrientes · DANE</div>
+        </div>
+        <div class="stat accent-sky">
+          <div class="label">Participación nacional</div>
+          <div class="value">0,96 %</div>
+          <div class="sub">PIB La Guajira / PIB Colombia · 2025pr</div>
+        </div>
+        <div class="stat accent-red">
+          <div class="label">Crecimiento real 2025</div>
+          <div class="value">−1,59 %</div>
+          <div class="sub">Segunda contracción consecutiva (2024–2025)</div>
+        </div>
+        <div class="stat accent-amber">
+          <div class="label">Crecimiento real promedio</div>
+          <div class="value">0,36 %</div>
+          <div class="sub">Promedio simple 2016–2025</div>
+        </div>
+      </div>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Tabla 3. PIB de La Guajira y Colombia, 2016–2025</h3>
+          <span class="badge">DANE · 2025pr</span>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-head">
+            <span class="chart-title">Crecimiento real anual del PIB (%)</span>
+            <span class="chart-note">La Guajira vs Colombia · valores negativos incluidos</span>
+          </div>
+          <div id="chart-pib" aria-live="polite"></div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Año</th>
+                <th scope="col" class="num">PIB La Guajira<br><span class="table-sub">billones de $ corrientes</span></th>
+                <th scope="col" class="num">PIB Colombia<br><span class="table-sub">billones de $ corrientes</span></th>
+                <th scope="col" class="num">Crecimiento real<br><span class="table-sub">La Guajira (%)</span></th>
+                <th scope="col" class="num">Crecimiento real<br><span class="table-sub">Colombia (%)</span></th>
+                <th scope="col" class="num">Participación<br><span class="table-sub">nacional (%)</span></th>
+              </tr>
+            </thead>
+            <tbody id="tabla-pib">
+              <tr>
+                <td>2016</td>
+                <td class="num">9,44</td>
+                <td class="num">863,78</td>
+                <td class="num delta good">2,60</td>
+                <td class="num delta good">2,09</td>
+                <td class="num">1,09</td>
+              </tr>
+              <tr>
+                <td>2017</td>
+                <td class="num">10,78</td>
+                <td class="num">920,47</td>
+                <td class="num delta good">1,18</td>
+                <td class="num delta good">1,36</td>
+                <td class="num">1,17</td>
+              </tr>
+              <tr>
+                <td>2018</td>
+                <td class="num">11,88</td>
+                <td class="num">987,79</td>
+                <td class="num delta bad">−0,21</td>
+                <td class="num delta good">2,56</td>
+                <td class="num">1,20</td>
+              </tr>
+              <tr>
+                <td>2019</td>
+                <td class="num">11,23</td>
+                <td class="num">1.060,07</td>
+                <td class="num delta bad">−0,24</td>
+                <td class="num delta good">3,19</td>
+                <td class="num">1,06</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>2020</td>
+                <td class="num">8,71</td>
+                <td class="num">998,47</td>
+                <td class="num delta bad">−23,57</td>
+                <td class="num delta bad">−7,19</td>
+                <td class="num">0,87</td>
+              </tr>
+              <tr>
+                <td>2021</td>
+                <td class="num">14,47</td>
+                <td class="num">1.192,63</td>
+                <td class="num delta good">28,08</td>
+                <td class="num delta good">10,80</td>
+                <td class="num">1,21</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>2022</td>
+                <td class="num">22,88</td>
+                <td class="num">1.471,08</td>
+                <td class="num delta bad">−2,86</td>
+                <td class="num delta good">7,33</td>
+                <td class="num">1,56</td>
+              </tr>
+              <tr>
+                <td>2023</td>
+                <td class="num">20,48</td>
+                <td class="num">1.587,20</td>
+                <td class="num delta good">1,38</td>
+                <td class="num delta good">0,84</td>
+                <td class="num">1,29</td>
+              </tr>
+              <tr>
+                <td>2024 <span class="year-tag">p</span></td>
+                <td class="num">18,26</td>
+                <td class="num">1.713,32</td>
+                <td class="num delta bad">−1,20</td>
+                <td class="num delta good">1,49</td>
+                <td class="num">1,07</td>
+              </tr>
+              <tr>
+                <td>2025 <span class="year-tag">pr</span></td>
+                <td class="num">17,76</td>
+                <td class="num">1.852,67</td>
+                <td class="num delta bad">−1,59</td>
+                <td class="num delta good">2,57</td>
+                <td class="num">0,96</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source">
+          <strong>Fuente:</strong> DANE, Cuentas Nacionales Departamentales, PIB departamental 2025pr
+          (<em>anexo PIBDep-TotalDep-2025pr</em>).
+          <br><strong>Nota metodológica:</strong> PIB a precios corrientes, base 2015, expresado en billones de pesos.
+          El crecimiento real se calcula con la serie de volumen (base 2015). <strong>p</strong> = preliminar;
+          <strong>pr</strong> = preliminar revisado. La participación nacional es el cociente entre el PIB de La Guajira
+          y el PIB de Colombia. El salto nominal de 2022 está asociado al choque de precios del carbón y no a un
+          crecimiento real equivalente. La gráfica y la tabla usan la misma serie y la misma fuente.
+        </p>
+      </article>
+
+      <div class="insight warn">
+        <span class="icon" aria-hidden="true">📊</span>
+        <div>
+          <h3>Volatilidad nominal, debilidad real</h3>
+          <p>
+            El PIB corriente pasó de <strong>9,44 billones</strong> en 2016 a <strong>22,88 billones</strong> en 2022,
+            impulsado por el precio internacional del carbón. Sin embargo, en términos reales La Guajira se contrajo
+            <strong>−23,57 %</strong> en 2020, rebotó <strong>+28,08 %</strong> en 2021, cayó <strong>−2,86 %</strong>
+            en 2022, creció apenas <strong>+1,38 %</strong> en 2023 y volvió a contraerse en 2024 y 2025. La
+            participación nacional cayó de <strong>1,09 %</strong> a <strong>0,96 %</strong> entre 2016 y 2025.
+          </p>
+        </div>
+      </div>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Tabla 4. Estructura del empleo por ramas de actividad (CIIU 4 A.C.)</h3>
+          <span class="badge blue">DANE · GEIH</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Rama de actividad</th>
+                <th scope="col" class="num">Ocupados<br><span class="table-sub">miles de personas</span></th>
+                <th scope="col" class="num">Participación<br><span class="table-sub">% del total</span></th>
+              </tr>
+            </thead>
+            <tbody id="tabla-ramas">
+              <tr><td colspan="3" class="chart-empty">Cargando estructura del empleo…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source" id="nota-ramas">
+          Fuente: DANE, GEIH – Ocupados según ramas CIIU 4 A.C., departamentos (archivo <code>Empleo departamentos.xls</code>).
+          La estructura se calcula con el último año disponible en la fuente.
+        </p>
+      </article>
+
+      <div class="insight">
+        <span class="icon" aria-hidden="true">🧭</span>
+        <div>
+          <h3>Una economía que produce distinto de lo que emplea</h3>
+          <p>
+            La minería y los servicios concentran buena parte del valor agregado, mientras que el empleo se
+            distribuye en comercio, servicios, agricultura y actividades de baja productividad. Esa diferencia
+            entre la estructura productiva y la estructura ocupacional ayuda a explicar la baja absorción de
+            empleo formal y la persistencia de la informalidad.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= INFLACIÓN ================= -->
+    <section class="section" id="inflacion" aria-labelledby="inflacion-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">04 · Precios</span>
+          <h2 id="inflacion-title">Inflación</h2>
+        </div>
+        <p class="section-sub">
+          Riohacha se usa como referencia de la capital porque el IPC no se publica como una medición
+          departamental completa. Los valores corresponden al año corrido disponible en la fuente.
+        </p>
+      </div>
+
+      <div class="stat-strip">
+        <div class="stat accent-teal">
+          <div class="label">Riohacha 2026 (ene–sep)</div>
+          <div class="value">4,06 %</div>
+          <div class="sub">Año corrido · IPC</div>
+        </div>
+        <div class="stat accent-sky">
+          <div class="label">Colombia 2026 (ene–sep)</div>
+          <div class="value">5,74 %</div>
+          <div class="sub">Año corrido · IPC</div>
+        </div>
+        <div class="stat accent-amber">
+          <div class="label">Brecha 2026 (ene–sep)</div>
+          <div class="value">−1,68 p.p.</div>
+          <div class="sub">Riohacha menos Colombia</div>
+        </div>
+        <div class="stat accent-red">
+          <div class="label">Máximo del periodo</div>
+          <div class="value">15,52 %</div>
+          <div class="sub">Riohacha · 2022</div>
+        </div>
+      </div>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Tabla 5. Inflación en Riohacha y Colombia, 2017–2026</h3>
+          <span class="badge">DANE · IPC</span>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-head">
+            <span class="chart-title">Inflación año corrido (%)</span>
+            <span class="chart-note">Riohacha como referencia de la capital · 2026 parcial (ene–sep)</span>
+          </div>
+          <div id="chart-ipc" aria-live="polite"></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Año</th>
+                <th scope="col" class="num">Riohacha (%)</th>
+                <th scope="col" class="num">Colombia (%)</th>
+                <th scope="col" class="num">Brecha (p.p.)</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-ipc">
+              <tr><td colspan="4" class="chart-empty">Cargando serie de inflación…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source" id="nota-ipc">
+          <strong>Fuente:</strong> DANE, Índice de Precios al Consumidor (IPC), archivo <code>IPC ciudades.xlsx</code>.
+          <br><strong>Nota:</strong> los valores son el campo <em>año corrido</em> de la fuente; no equivalen necesariamente
+          a la inflación anual diciembre–diciembre. Para 2026, el acumulado corresponde a enero–septiembre y se marca
+          como año parcial. Riohacha se usa como referencia de la capital, no como medición representativa de todo el
+          departamento. La gráfica y la tabla usan la misma serie y la misma fuente.
+        </p>
+      </article>
+
+      <div class="insight">
+        <span class="icon" aria-hidden="true">🛒</span>
+        <div>
+          <h3>Alivio reciente, pero precios acumulados altos</h3>
+          <p>
+            La inflación de Riohacha fue inferior a la nacional en 2024, 2025 y en el acumulado enero–septiembre
+            de 2026 <strong>(4,06 % frente a 5,74 %)</strong>, después del pico excepcional de 2022
+            <strong>(15,52 %)</strong>. La desaceleración alivia el poder adquisitivo de los hogares, pero no
+            revierte el aumento acumulado de precios de los años anteriores. La comparación debe leerse con cautela
+            porque se trata de año corrido, de una ciudad y, en 2026, de un periodo parcial.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EMPLEO ================= -->
+    <section class="section" id="desempleo" aria-labelledby="desempleo-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">05 · Mercado laboral</span>
+          <h2 id="desempleo-title">Desempleo e informalidad</h2>
+        </div>
+        <p class="section-sub">
+          La tasa de desocupación de La Guajira se compara con el promedio nacional. La informalidad se mide en
+          Riohacha frente al agregado de las 23 ciudades y áreas metropolitanas, porque DANE no publica una serie
+          departamental comparable para todo el periodo.
+        </p>
+      </div>
+
+      <div class="stat-strip">
+        <div class="stat accent-red">
+          <div class="label">Tasa de desocupación · La Guajira 2025</div>
+          <div class="value">12,3 %</div>
+          <div class="sub">Serie departamental GEIH</div>
+        </div>
+        <div class="stat accent-sky">
+          <div class="label">Tasa de desocupación · Colombia 2025</div>
+          <div class="value">8,9 %</div>
+          <div class="sub">Promedio anual de la serie nacional</div>
+        </div>
+        <div class="stat accent-amber">
+          <div class="label">Brecha de desocupación</div>
+          <div class="value">+3,4 p.p.</div>
+          <div class="sub">La Guajira menos Colombia · 2025</div>
+        </div>
+        <div class="stat accent-teal">
+          <div class="label">Informalidad Riohacha Q4 2025</div>
+          <div class="value">61,37 %</div>
+          <div class="sub">23 ciudades y A.M.: 43,61 %</div>
+        </div>
+      </div>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Tabla 6. Tasa de desocupación (TD): La Guajira y Colombia, 2016–2025</h3>
+          <span class="badge">DANE · GEIH</span>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-head">
+            <span class="chart-title">Tasa de desocupación (TD) (%)</span>
+            <span class="chart-note">La Guajira vs Colombia · comparación referencial</span>
+          </div>
+          <div id="chart-desempleo" aria-live="polite"></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Año</th>
+                <th scope="col" class="num">La Guajira<br><span class="table-sub">TD (%)</span></th>
+                <th scope="col" class="num">Colombia<br><span class="table-sub">TD (%)</span></th>
+                <th scope="col" class="num">Brecha<br><span class="table-sub">p.p.</span></th>
+              </tr>
+            </thead>
+            <tbody id="tabla-desempleo">
+              <tr><td colspan="4" class="chart-empty">Cargando serie de desocupación…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source">
+          <strong>Fuente:</strong> DANE, Gran Encuesta Integrada de Hogares (GEIH), serie departamental anual
+          (<code>Empleo departamentos.xls</code>) y serie nacional mensual. Colombia se calcula como promedio anual
+          de la tasa mensual con la metodología vigente (CNPV 2018).
+          <br><strong>Nota:</strong> la comparación es referencial. La serie departamental es volátil y puede reflejar
+          cambios en la composición del mercado laboral, además de diferencias metodológicas. Para un análisis más
+          completo conviene complementar con la TGP, la TO y la subocupación. La gráfica y la tabla usan la misma
+          serie y la misma fuente.
+        </p>
+      </article>
+
+      <div class="insight danger">
+        <span class="icon" aria-hidden="true">🔄</span>
+        <div>
+          <h3>La relación con Colombia se invirtió</h3>
+          <p>
+            Entre 2016 y 2022, la tasa de desocupación de La Guajira fue inferior a la nacional. Desde 2023 la
+            supera: en 2025 la brecha es de <strong>+3,4 p.p.</strong> (12,3 % frente a 8,9 %). Esta reversión
+            coincide con la caída de la actividad minera y con un mercado laboral dependiente de servicios,
+            comercio y empleo informal. La volatilidad de la serie aconseja leer el dato junto con las tasas de
+            participación y ocupación.
+          </p>
+        </div>
+      </div>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Tabla 6A. Tasa de desocupación por edad y sexo, La Guajira 2025</h3>
+          <span class="badge amber">DANE · GEIH · microdatos</span>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-head">
+            <span class="chart-title">Tasa de desocupación por edad y sexo (%)</span>
+            <span class="chart-note">La Guajira · 2025 · estimación con microdatos GEIH</span>
+          </div>
+          <div id="chart-edad-sexo" aria-live="polite"></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Grupo de edad</th>
+                <th scope="col" class="num">Total<br><span class="table-sub">TD (%)</span></th>
+                <th scope="col" class="num">Hombres<br><span class="table-sub">TD (%)</span></th>
+                <th scope="col" class="num">Mujeres<br><span class="table-sub">TD (%)</span></th>
+                <th scope="col" class="num">Brecha<br><span class="table-sub">mujeres − hombres (p.p.)</span></th>
+              </tr>
+            </thead>
+            <tbody id="tabla-edad-sexo">
+              <tr><td colspan="5" class="chart-empty">Cargando desocupación por edad y sexo…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source">
+          <strong>Fuente:</strong> DANE, Gran Encuesta Integrada de Hogares (GEIH) 2025, microdatos mensuales.
+          Desocupación identificada con <code>DSI = 1</code> en el archivo <code>No ocupados</code>; ocupación
+          tomada del archivo <code>Ocupados</code>. Cálculos propios con el factor de expansión <code>FEX_C18</code>.
+          <br><strong>Nota:</strong> las tasas por edad y sexo son estimaciones con muestras limitadas y pueden
+          diferir de la serie oficial de la Tabla 6. La categoría 65+ mujeres se marca con
+          <sup class="sample-flag">a</sup> porque tiene muy pocos registros anuales; su valor debe leerse solo como
+          referencia. El total oficial se incluye como fila de contraste y no es la suma de las estimaciones por edad;
+          su brecha (6,2 p.p.) se toma del boletín y puede diferir de la resta de tasas redondeadas.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Tabla 7. Informalidad laboral en Riohacha y las 23 ciudades, Q4 2016–2025</h3>
+          <span class="badge amber">Trimestre octubre–diciembre</span>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-head">
+            <span class="chart-title">Tasa de informalidad laboral (%) · Q4</span>
+            <span class="chart-note">Riohacha vs 23 ciudades y áreas metropolitanas</span>
+          </div>
+          <div id="chart-informalidad" aria-live="polite"></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Año <span class="table-sub">trimestre Q4</span></th>
+                <th scope="col" class="num">Riohacha (%)</th>
+                <th scope="col" class="num">23 ciudades y A.M. (%)</th>
+                <th scope="col" class="num">Brecha (p.p.)</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-informalidad">
+              <tr><td>2016</td><td class="num">62,46</td><td class="num">48,67</td><td class="num delta bad">+13,79</td></tr>
+              <tr><td>2017</td><td class="num">63,52</td><td class="num">48,30</td><td class="num delta bad">+15,22</td></tr>
+              <tr><td>2018</td><td class="num">62,11</td><td class="num">48,16</td><td class="num delta bad">+13,95</td></tr>
+              <tr><td>2019</td><td class="num">61,71</td><td class="num">47,61</td><td class="num delta bad">+14,10</td></tr>
+              <tr><td>2020</td><td class="num">59,23</td><td class="num">48,97</td><td class="num delta bad">+10,26</td></tr>
+              <tr class="highlight-row"><td>2021</td><td class="num">68,26</td><td class="num">45,71</td><td class="num delta bad">+22,55</td></tr>
+              <tr class="highlight-row"><td>2022</td><td class="num">67,94</td><td class="num">44,26</td><td class="num delta bad">+23,68</td></tr>
+              <tr><td>2023</td><td class="num">61,01</td><td class="num">42,97</td><td class="num delta bad">+18,04</td></tr>
+              <tr><td>2024</td><td class="num">61,79</td><td class="num">43,76</td><td class="num delta bad">+18,03</td></tr>
+              <tr><td>2025</td><td class="num">61,37</td><td class="num">43,61</td><td class="num delta bad">+17,76</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="source">
+          <strong>Fuente:</strong> DANE, GEIH, empleo informal y seguridad social. Anexos históricos 2019 y 2020
+          para 2016–2020 y anexo vigente 2026 para 2021–2025.
+          <br><strong>Nota metodológica:</strong> se usa la tasa de informalidad laboral (proporción de ocupados
+          informales) del trimestre octubre–diciembre de cada año. Riohacha se usa como referencia de la capital
+          porque DANE no publica una serie departamental comparable para todo el periodo. La serie 2021+ incorpora
+          la actualización metodológica de la GEIH, por lo que la comparación con 2016–2020 debe tomarse con cautela;
+          el salto de 2021 refleja, en parte, ese cambio metodológico.
+        </p>
+      </article>
+
+      <div class="insight warn">
+        <span class="icon" aria-hidden="true">🏷️</span>
+        <div>
+          <h3>La brecha de informalidad sigue siendo alta</h3>
+          <p>
+            En el cuarto trimestre de 2025, la informalidad de Riohacha <strong>(61,37 %)</strong> superó en
+            <strong>17,76 p.p.</strong> a la de las 23 ciudades y áreas metropolitanas <strong>(43,61 %)</strong>.
+            La brecha se amplió entre 2021 y 2022, hasta <strong>23,68 p.p.</strong>, y se redujo en 2023–2025,
+            pero sigue siendo una de las más altas del país. La magnitud del fenómeno está asociada a la estructura
+            productiva, al empleo por cuenta propia y a la baja formalización de las unidades económicas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DIAGNÓSTICO ================= -->
+    <section class="section" id="diagnostico" aria-labelledby="diagnostico-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">06 · Síntesis</span>
+          <h2 id="diagnostico-title">Diagnóstico económico general</h2>
+        </div>
+        <p class="section-sub">
+          La Guajira combina un territorio estratégico y una base de recursos naturales con brechas sociales
+          profundas, alta informalidad y una economía vulnerable a los ciclos de precios de las materias primas.
+        </p>
+      </div>
+
+      <div class="brechas-grid" aria-label="Brechas clave frente a Colombia">
+        <div class="brecha-card"><div class="label">Pobreza monetaria</div><div class="value">+32,2 p.p.</div><div class="sub">La Guajira vs Colombia · 2025</div></div>
+        <div class="brecha-card"><div class="label">NBI</div><div class="value">+39,0 p.p.</div><div class="sub">La Guajira vs Colombia · 2018</div></div>
+        <div class="brecha-card"><div class="label">Acueducto</div><div class="value">−39,8 p.p.</div><div class="sub">Cobertura · 2018</div></div>
+        <div class="brecha-card"><div class="label">Alcantarillado</div><div class="value">−34,7 p.p.</div><div class="sub">Cobertura · 2018</div></div>
+        <div class="brecha-card"><div class="label">Informalidad</div><div class="value">+17,8 p.p.</div><div class="sub">Riohacha vs 23 ciudades · Q4 2025</div></div>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <div class="card-head">
+            <h3>Fortalezas y oportunidades</h3>
+            <span class="badge green">Potencial</span>
+          </div>
+          <ul class="list-check oportunidades">
+            <li><strong>Posición estratégica:</strong> frontera con Venezuela, costa Caribe y conexión con mercados del norte.</li>
+            <li><strong>Recursos naturales:</strong> carbón, energía eólica y solar, pesca y agricultura.</li>
+            <li><strong>Turismo:</strong> paisajes desérticos, cultura wayuu, artesanías y patrimonio inmaterial.</li>
+            <li><strong>Capital humano joven:</strong> población joven y diversidad cultural como base para educación y emprendimiento.</li>
+            <li><strong>Agua y saneamiento:</strong> invertir en acueducto y alcantarillado tiene alto retorno social y sanitario.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h3>Problemas y retos</h3>
+            <span class="badge red">Alertas</span>
+          </div>
+          <ul class="list-check retos">
+            <li><strong>Pobreza y desigualdad:</strong> pobreza monetaria de 60,2 % y extrema de 33,8 % en 2025.</li>
+            <li><strong>Servicios básicos:</strong> coberturas de acueducto y alcantarillado muy por debajo del promedio nacional.</li>
+            <li><strong>Informalidad:</strong> 61,37 % en Riohacha (Q4 2025), con una brecha de 17,76 p.p. frente a las 23 ciudades.</li>
+            <li><strong>Dependencia extractiva:</strong> alta sensibilidad a los precios del carbón y a los ciclos de inversión minera.</li>
+            <li><strong>Desempleo:</strong> 12,3 % en 2025, superior al promedio nacional, con reversión frente a años anteriores.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="grid-2" style="margin-top:18px">
+        <article class="card">
+          <div class="card-head">
+            <h3>Sectores con potencial</h3>
+            <span class="badge blue">Apuestas</span>
+          </div>
+          <p>
+            <strong>Energías renovables:</strong> el departamento tiene uno de los mejores recursos eólicos y solares
+            del país; el reto es convertir esa ventaja en empleo local, encadenamientos productivos y revenue
+            territorial.<br><br>
+            <strong>Turismo cultural y de naturaleza:</strong> la cultura wayuu, el Cabo de la Vela, Punta Gallinas,
+            el desierto y la costa ofrecen una base para turismo comunitario y de bajo impacto.<br><br>
+            <strong>Agroindustria y pesca:</strong> valor agregado a la producción local, cadenas de frío y
+            formalización de unidades productivas.<br><br>
+            <strong>Agua y saneamiento:</strong> infraestructura, mantenimiento y gestión comunitaria del recurso.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h3>Estrategias sugeridas</h3>
+            <span class="badge amber">Ruta de política</span>
+          </div>
+          <ul class="list-check">
+            <li>Cerrar brechas de acueducto y alcantarillado con inversión priorizada por ruralidad y dispersión.</li>
+            <li>Formalizar unidades productivas y reducir costos de entrada al empleo formal.</li>
+            <li>Diversificar la economía con energías renovables, turismo y agroindustria.</li>
+            <li>Fortalecer educación media y formación para el trabajo, con pertinencia territorial.</li>
+            <li>Mejorar la información estadística local y la evaluación de políticas públicas.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="insight">
+        <span class="icon" aria-hidden="true">🎯</span>
+        <div>
+          <h3>La brecha no es solo de ingresos</h3>
+          <p>
+            La pobreza monetaria, el NBI, la informalidad y el déficit de servicios básicos se refuerzan entre sí.
+            Un hogar sin agua potable, con empleo informal y baja escolaridad tiene menos probabilidades de salir de
+            la pobreza, y una economía dependiente de la minería tiene menos capacidad de absorber ese empleo en
+            actividades formales. Por eso las políticas de agua, educación, formalización y diversificación deben
+            pensarse de manera articulada.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONCLUSIONES ================= -->
+    <section class="section" id="conclusiones" aria-labelledby="conclusiones-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">07 · Cierre</span>
+          <h2 id="conclusiones-title">Conclusiones</h2>
+        </div>
+        <p class="section-sub">
+          Cinco ideas para resumir el diagnóstico y orientar la discusión sobre el desarrollo territorial.
+        </p>
+      </div>
+
+      <div class="conclusions">
+        <article class="conclusion">
+          <h3>Territorio extenso, población dispersa</h3>
+          <p>
+            La Guajira tiene 1.073.851 habitantes (2025), de los cuales cerca del 48,8 % vive en centros poblados
+            y rural disperso. La baja densidad y la dispersión encarecen la provisión de servicios y exigen
+            soluciones diferenciadas para la ruralidad.
+          </p>
+        </article>
+        <article class="conclusion">
+          <h3>Brechas sociales que limitan el bienestar</h3>
+          <p>
+            La pobreza monetaria (60,2 %), la pobreza extrema (33,8 %) y el NBI (53,3 %) están muy por encima del
+            promedio nacional. Las coberturas de acueducto (46,6 %) y alcantarillado (41,9 %) equivalen a poco más
+            de la mitad de las de Colombia.
+          </p>
+        </article>
+        <article class="conclusion">
+          <h3>Una economía volátil y dependiente de la minería</h3>
+          <p>
+            El PIB corriente se multiplicó por 2,4 entre 2016 y 2022, pero el crecimiento real fue negativo en
+            2020, 2022, 2024 y 2025. La participación nacional cayó de 1,09 % a 0,96 %. La diversificación es una
+            condición para estabilizar el empleo y los ingresos.
+          </p>
+        </article>
+        <article class="conclusion">
+          <h3>Mercado laboral con reversión y alta informalidad</h3>
+          <p>
+            La tasa de desocupación pasó de estar por debajo de la nacional a superarla: 12,3 % frente a 8,9 % en
+            2025. La informalidad de Riohacha (61,37 % en Q4 2025) es 17,76 p.p. superior a la de las 23 ciudades,
+            lo que refleja la estructura productiva y la baja formalización.
+          </p>
+        </article>
+        <article class="conclusion">
+          <h3>Oportunidades para una agenda de desarrollo</h3>
+          <p>
+            Energías renovables, turismo cultural y de naturaleza, agroindustria, pesca y agua y saneamiento son
+            apuestas con potencial. Para convertirlas en bienestar se requiere inversión, formación de capital
+            humano, formalización y articulación entre el sector público, el privado y las comunidades.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= FUENTES ================= -->
+    <section class="section" id="fuentes" aria-labelledby="fuentes-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">08 · Transparencia</span>
+          <h2 id="fuentes-title">Fuentes y notas metodológicas</h2>
+        </div>
+        <p class="section-sub">
+          Todas las cifras provienen de operaciones estadísticas oficiales o de documentos institucionales.
+          Cuando un indicador no es estrictamente comparable, se indica en la nota.
+        </p>
+      </div>
+
+      <ul class="sources">
+        <li>
+          <strong>DANE · Cuentas Nacionales Departamentales</strong>
+          PIB departamental 2025pr, precios corrientes y crecimiento real.
+          <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/cuentas-nacionales/cuentas-nacionales-departamentales" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>DANE · Pobreza monetaria departamental</strong>
+          Pobreza y pobreza extrema 2025.
+          <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/pobreza-y-condiciones-de-vida/pobreza-monetaria" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>DANE · Pobreza multidimensional</strong>
+          Pobreza multidimensional 2024.
+          <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/pobreza-y-condiciones-de-vida/pobreza-multidimensional" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>DANE · CNPV 2018</strong>
+          NBI actualizado 2021 y cobertura de servicios públicos.
+          <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>DANE · GEIH</strong>
+          Empleo departamental, desempleo y empleo informal.
+          <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/mercado-laboral/empleo-y-desempleo" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>DANE · Índice de Precios al Consumidor (IPC)</strong>
+          Inflación de Riohacha y Colombia, 2017–2026 (2026 parcial a septiembre).
+          <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/precios-y-costos/indice-de-precios-al-consumidor-ipc" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>DANE · Proyecciones de población</strong>
+          Proyecciones 2018–2050 y proyección municipal 2025.
+          <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>DNP · Terridata y Programación presupuestal 2025</strong>
+          Población departamental y municipal.
+          <a href="https://terridata.dnp.gov.co/" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>Ministerio de Salud y Protección Social · BDUA</strong>
+          Afiliación al SGSSS 2025, reportada por Así Vamos en Salud.
+          <a href="https://www.minsalud.gov.co/" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>Ministerio de Educación Nacional</strong>
+          Cobertura neta en educación media 2022, con apoyo de la Fundación Empresarios por la Educación.
+          <a href="https://www.mineducacion.gov.co/" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>DANE · Marco Geoestadístico Nacional</strong>
+          Límites departamentales y municipales de la División Político-Administrativa 2012, usados en el mapa interactivo.
+          <a href="https://portalgis.dane.gov.co/mparcgis/rest/services/INDICADORES_CTERRITORIO/Cache_MpiosCTDeptosAM_DivisionPolitica_2012/MapServer" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>IGAC · Extensión territorial</strong>
+          Área departamental y municipal.
+          <a href="https://www.igac.gov.co/" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+        <li>
+          <strong>Alcaldía de Riohacha · Información municipal</strong>
+          Extensión y datos generales del municipio.
+          <a href="https://www.riohacha-laguajira.gov.co/" target="_blank" rel="noopener noreferrer">Consultar</a>
+        </li>
+      </ul>
+
+      <div class="grid-2" style="margin-top:18px">
+        <article class="card">
+          <div class="card-head">
+            <h3>Notas metodológicas</h3>
+            <span class="badge">Leer antes de comparar</span>
+          </div>
+          <ul class="list-check">
+            <li><strong>PIB:</strong> los valores corrientes no miden crecimiento real. El crecimiento real se calcula con la serie de volumen y puede diferir del cambio nominal.</li>
+            <li><strong>IPC:</strong> Riohacha es una referencia de la capital, no una medición departamental completa. Los valores son año corrido, no necesariamente diciembre–diciembre.</li>
+            <li><strong>Informalidad:</strong> se usa el trimestre octubre–diciembre (Q4). La serie 2021+ incorpora un cambio metodológico de la GEIH y no es estrictamente comparable con 2016–2020.</li>
+            <li><strong>Indicadores sociales:</strong> provienen de años distintos; cada celda indica el año del dato. Las brechas se calculan como La Guajira menos Colombia.</li>
+            <li><strong>Población:</strong> se usan las proyecciones DANE y la programación del DNP; pueden existir diferencias menores entre versiones.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h3>Limitaciones del ejercicio</h3>
+            <span class="badge amber">Alcance</span>
+          </div>
+          <p>
+            Este documento es un diagnóstico descriptivo con fines académicos y de divulgación. No sustituye las
+            publicaciones oficiales ni constituye una evaluación de impacto. Algunas series departamentales tienen
+            pocos años, alta volatilidad o cambios metodológicos, por lo que las comparaciones deben interpretarse
+            con cautela.
+          </p>
+          <p>
+            Para actualizar las cifras, revise las fuentes enlazadas y los archivos locales del proyecto. Si una
+            fuente cambia la versión de un año, es posible que los valores preliminares se revisen.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= DATOS / RUTAS ================= -->
+    <section class="section" id="datos" aria-labelledby="datos-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">09 · Datos abiertos</span>
+          <h2 id="datos-title">Datos y rutas dinámicas</h2>
+        </div>
+        <p class="section-sub">
+          La página carga automáticamente los JSON del proyecto. También puede cambiar las rutas o cargar archivos
+          locales si abre el sitio sin un servidor.
+        </p>
+      </div>
+
+      <div class="form-actions" style="margin-bottom:10px">
+        <a class="btn btn-secondary btn-small" href="data_guajira.json" download>Descargar data_guajira.json</a>
+        <a class="btn btn-secondary btn-small" href="ipc_riohacha.json" download>Descargar ipc_riohacha.json</a>
+        <a class="btn btn-secondary btn-small" href="empleo_guajira.json" download>Descargar empleo_guajira.json</a>
+      </div>
+
+      <p class="status" id="load-status" role="status">Esperando la carga automática de datos…</p>
+
+      <details>
+        <summary>Configurar rutas y cargar archivos locales</summary>
+        <div class="details-body">
+          <div class="controls">
+            <div class="field">
+              <label for="path-bundle">Paquete unificado (JSON)</label>
+              <input type="text" id="path-bundle" value="data_guajira.json" />
+            </div>
+            <div class="field">
+              <label for="path-ipc">IPC Riohacha (JSON)</label>
+              <input type="text" id="path-ipc" value="ipc_riohacha.json" />
+            </div>
+            <div class="field">
+              <label for="path-emp">Empleo La Guajira (JSON)</label>
+              <input type="text" id="path-emp" value="empleo_guajira.json" />
+            </div>
+            <div class="field">
+              <label for="file-bundle">Cargar paquete local</label>
+              <input type="file" id="file-bundle" accept=".json,application/json" />
+            </div>
+            <div class="field">
+              <label for="file-ipc">Cargar IPC local</label>
+              <input type="file" id="file-ipc" accept=".json,application/json" />
+            </div>
+            <div class="field">
+              <label for="file-emp">Cargar empleo local</label>
+              <input type="file" id="file-emp" accept=".json,application/json" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary btn-small" type="button" id="btn-load">Recargar datos</button>
+          </div>
+          <p class="hint">
+            Para abrir el sitio se recomienda un servidor local: <code>python3 -m http.server 8000</code> y luego
+            <code>http://localhost:8000/index.html</code>. Si abre el archivo con doble clic, el navegador puede
+            bloquear la carga automática de JSON; en ese caso use los selectores de archivos locales.
+          </p>
+        </div>
+      </details>
+
+      <div class="grid-3" style="margin-top:18px">
+        <article class="card">
+          <div class="card-head"><h3>Archivos del proyecto</h3><span class="badge blue">JSON</span></div>
+          <p class="small muted">
+            <code>data_guajira.json</code>: paquete unificado con IPC, empleo, ramas, PIB e informalidad.<br>
+            <code>ipc_riohacha.json</code>: serie de inflación.<br>
+            <code>empleo_guajira.json</code>: serie de empleo departamental y referencia nacional.<br>
+            <code>map_guajira.js</code>: geometrías DANE y metadatos del mapa interactivo.
+          </p>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>Configuración</h3><span class="badge amber">config.js</span></div>
+          <p class="small muted">
+            Edite <code>config.js</code> para cambiar las rutas de los archivos fuente y los JSON, o el nombre del
+            departamento y la capital. La página usa esas rutas al iniciar.
+          </p>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>Actualización</h3><span class="badge green">Buenas prácticas</span></div>
+          <p class="small muted">
+            Conserve el año y la fuente de cada cifra. Si actualiza una serie, revise las notas metodológicas y
+            verifique que los totales y las participaciones sigan siendo consistentes.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <strong>La Guajira en cifras</strong> · Diagnóstico socioeconómico y macroeconómico<br>
+        Elaborado con fines académicos y de divulgación. Última actualización de datos: noviembre de 2026.
+      </div>
+      <div class="no-print">
+        <strong>Fuentes principales:</strong> DANE, DNP, MinSalud, MinEducación, IGAC y Alcaldía de Riohacha.<br>
+        Las cifras pueden ser revisadas por las entidades fuente; consulte siempre la publicación oficial.
+      </div>
+    </div>
+  </footer>
+
+  <script src="map_guajira.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
