@@ -346,6 +346,8 @@ FUNDAMENTOS DE ECONOMIA/
 ├── empleo_guajira.json        Serie de empleo
 ├── LEEME.txt                  Notas de datos y metodología
 ├── MANUAL.md                  Este manual
+├── vercel.json                Configuración de despliegue en Vercel
+├── DESPLIEGUE-VERCEL.md       Guía de publicación en Vercel
 └── archivos fuente (.xls/.xlsx/.csv)
 ```
 
@@ -369,3 +371,23 @@ Detener:
 ```text
 Ctrl + C
 ```
+
+---
+
+## 13. Despliegue en Vercel
+
+El proyecto es un sitio estático y ya está configurado con `vercel.json` (sin build ni
+`package.json`). Para publicarlo:
+
+```bash
+cd ~/Descargas/"FUNDAMENTOS DE ECONOMIA"
+npx vercel login
+npx vercel          # preview
+npx vercel --prod   # producción
+```
+
+También puede importar el repositorio en [vercel.com/new](https://vercel.com/new) con
+**Framework Preset: Other**, **Build Command** vacío y **Output Directory** `.`.
+
+La guía completa (dominios, actualizaciones, verificación y problemas frecuentes) está en
+[`DESPLIEGUE-VERCEL.md`](DESPLIEGUE-VERCEL.md).

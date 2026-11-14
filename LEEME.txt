@@ -37,6 +37,8 @@ puede usar los selectores de "Cargar archivo local" en la sección
 - empleo_guajira.json: serie de empleo departamental y referencia nacional.
 - IPC  ciudades.xlsx: archivo fuente original del IPC.
 - Empleo departamentos.xls: archivo fuente original de empleo.
+- vercel.json: configuración para publicar el sitio en Vercel.
+- DESPLIEGUE-VERCEL.md: guía de despliegue en Vercel.
 - LEEME.txt: este documento.
 
 3. RUTAS DINÁMICAS
@@ -211,5 +213,24 @@ Tabla 7. Informalidad Q4 2016-2025
 Elaborado con fines académicos y de divulgación. Fuentes principales:
 DANE, DNP, Ministerio de Salud y Protección Social, Ministerio de Educación
 Nacional, IGAC y Alcaldía de Riohacha.
+
+9. DESPLIEGUE EN VERCEL
+-----------------------
+El proyecto ya incluye vercel.json y puede publicarse como sitio estático,
+sin compilación ni package.json.
+
+Con la CLI de Vercel:
+  cd "FUNDAMENTOS DE ECONOMIA"
+  npx vercel login
+  npx vercel           (despliegue de prueba)
+  npx vercel --prod    (producción)
+
+También puede importar la carpeta o el repositorio desde vercel.com/new con:
+  Framework Preset: Other
+  Build Command:    (vacío)
+  Output Directory: .
+
+Consulte DESPLIEGUE-VERCEL.md para el paso a paso, dominios propios y
+solución de problemas.
 
 Última actualización de datos: noviembre de 2026.

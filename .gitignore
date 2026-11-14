@@ -1,0 +1,10 @@
+# Vercel CLI
+.vercel
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Dependencias y registros
+node_modules/
+*.log
